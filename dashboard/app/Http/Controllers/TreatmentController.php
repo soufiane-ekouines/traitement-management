@@ -2,84 +2,62 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TreatmentRequest;
+use App\Models\category;
 use App\Models\treatment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TreatmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $treatments = treatment::where('user_id',Auth::id())->get();
+        return view('',compact('treatments'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        $category = category::where('user_id',Auth::id())->get();
+        return view('',compact('category'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function store(TreatmentRequest $request)
     {
-        //
+        treatment::create($request->validated());
+        return redirect()->route('');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\treatment  $treatment
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(treatment $treatment)
     {
-        //
+        // $treatment = treatment::find($id);
+        return view('',compact('treatment'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\treatment  $treatment
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(treatment $treatment)
     {
-        //
+        $category = category::where('user_id',Auth::id())->get();
+        // $treatment = treatment::find($id);
+        return view('',compact('treatment','category'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\treatment  $treatment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, treatment $treatment)
+    public function update(TreatmentRequest $request, treatment $treatment)
     {
-        //
+
+        // $treatment = treatment::find($id);
+        $treatment->create($request->validated());
+        return redirect()->route('');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\treatment  $treatment
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(treatment $treatment)
     {
-        //
+        // $treatment=treatment::find($id);
+        $treatment->delete();
+        return view('',compact('treatment'));
     }
 }

@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('taketreatments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('treatment_id')->constrained()->onDelete('cascade');
+            $table->string('desc')->nullable(true);
             $table->timestamps();
         });
     }

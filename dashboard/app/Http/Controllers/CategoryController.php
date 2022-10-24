@@ -4,27 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $categorys = category::where('user_id',Auth::id())->get();
+        return view('',compact('categorys'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function create()
     {
-        //
+        return view('');
     }
 
     /**
@@ -35,7 +29,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        category::create($request->validated());
+        return redirect()->route('');
     }
 
     /**
@@ -46,7 +41,8 @@ class CategoryController extends Controller
      */
     public function show(category $category)
     {
-        //
+        // $category = category::find($id);
+        return view('',compact('category'));
     }
 
     /**
@@ -57,7 +53,8 @@ class CategoryController extends Controller
      */
     public function edit(category $category)
     {
-        //
+    // $category = category::find($id);
+    return view('',compact('category'));
     }
 
     /**
@@ -69,7 +66,9 @@ class CategoryController extends Controller
      */
     public function update(Request $request, category $category)
     {
-        //
+        // $category = category::find($id);
+        $category->create($request->validated());
+        return redirect()->route('');
     }
 
     /**
@@ -80,6 +79,8 @@ class CategoryController extends Controller
      */
     public function destroy(category $category)
     {
-        //
+    // $category=category::find($id);
+    $category->delete();
+    return view('',compact('category'));
     }
 }

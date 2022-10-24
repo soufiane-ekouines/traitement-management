@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('rdvs', function (Blueprint $table) {
             $table->id();
+            $table->string('designation');
+            $table->string('desc');
+            $table->foreignId('treatments')->constrained()->nullable(true);
+            $table->date('date_rdv');
+            $table->boolean('valide')->default(false);
             $table->timestamps();
         });
     }

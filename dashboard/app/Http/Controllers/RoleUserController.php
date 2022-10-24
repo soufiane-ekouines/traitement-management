@@ -2,84 +2,57 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\roleUserRequest;
 use App\Models\RoleUser;
 use Illuminate\Http\Request;
 
 class RoleUserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        return view('');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        return view('');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function store(roleUserRequest $request)
     {
-        //
+        RoleUser::create($request->validated());
+        return redirect()->route('');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\RoleUser  $roleUser
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(RoleUser $roleUser)
     {
-        //
+         // $roleUser = roleUser::find($id);
+         return view('',compact('roleUser'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\RoleUser  $roleUser
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(RoleUser $roleUser)
     {
-        //
+        // $roleUser = roleUser::find($id);
+        return view('',compact('roleUser'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\RoleUser  $roleUser
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, RoleUser $roleUser)
+    public function update(roleUserRequest $request, RoleUser $roleUser)
     {
-        //
+        // $roleUser = roleUser::find($id);
+        $roleUser->create($request->validated());
+        return redirect()->route('');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\RoleUser  $roleUser
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(RoleUser $roleUser)
     {
-        //
+        // $roleUser=RoleUser::find($id);
+        $roleUser->delete();
+        return view('',compact('roleUser'));
     }
 }

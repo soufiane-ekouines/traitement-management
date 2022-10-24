@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('takealerts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('alert_id')->constrained()->onDelete('cascade');
+            $table->boolean('valide')->default(false);
             $table->timestamps();
         });
     }
