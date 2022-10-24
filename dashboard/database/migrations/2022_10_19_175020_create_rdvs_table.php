@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('treatments')->constrained()->nullable(true);
             $table->date('date_rdv');
             $table->boolean('valide')->default(false);
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
