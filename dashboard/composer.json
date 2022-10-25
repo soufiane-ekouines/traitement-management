@@ -10,9 +10,11 @@
         "laravel/breeze": "^1.14",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "rebing/graphql-laravel": "^8.3"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.12",
         "fakerphp/faker": "^1.9.1",
         "laravel/dusk": "^7.1",
         "laravel/pint": "^1.0",
